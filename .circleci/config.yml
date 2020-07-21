@@ -3,11 +3,13 @@ orbs:
   docker: circleci/docker@1.0.0
   heroku: circleci/heroku@1.0.1
 workflows:
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+
   deploy:
     jobs:
       - docker/publish:
           image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
           tag: 'latest'
-    heroku_deploy:
-        jobs:
-          - heroku/deploy-via-git
+
